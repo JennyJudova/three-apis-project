@@ -4,6 +4,8 @@ import axios from 'axios';
 
 export default function VillainShow(props) {
   const [recipe, setRecipe] = useState();
+  // const [ingredients, setIngredients] = useState();
+  const [nutrition, setNutrition] = useState();
   const [errors, setErrors] = useState();
   const { id } = props.match.params;
 
@@ -19,10 +21,30 @@ export default function VillainShow(props) {
       });
   };
 
+  const getNutrition = () => {
+    const { YOUR_APP_ID } = process.env;
+    const { YOUR_APP_KEY } = process.env;
+    const ingredients = {
+      ingr: ['6oz/180g rice stick noodles', '2 tbsp dark soy sauce']
+    };
+    axios
+      .post(
+        `https://api.edamam.com/api/nutrition-details?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`,
+        ingredients
+      )
+      .then((res) => {
+        console.log(res.data);
+        setNutrition(res.data);
+      })
+      .catch((err) => {
+        setErrors(err);
+      });
+  };
   // https://api.edamam.com/api/nutrition-details?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}
 
   useEffect(() => {
     getData();
+    getNutrition();
   }, []);
 
   return (
