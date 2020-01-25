@@ -1,0 +1,22 @@
+.indexWrapper {
+  border: none;
+  overflow-x: hidden; //horizontal
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  div {
+    border: 2px black solid;
+    border-radius: 1px;
+    margin: 20px;
+    padding: 10px;
+    max-width: 200px;
+  }
+  img {
+    width: 100%;
+    max-width: 200px;
+    height: 200px;
+    border-radius: 1px;
+    object-fit: cover;
+  }
+}
