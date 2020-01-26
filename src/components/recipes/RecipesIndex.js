@@ -48,25 +48,3 @@ export default function RecipesIndex() {
     </div>
   );
 }
-
-{
-  /* <div className="indexWrapper">
-{allVillains &&
-  allVillains.map((villain) => (
-    <div key={villain._id}>
-      <Link to={`/villains/${villain._id}`}>
-        <img
-          src={
-            villain.image
-              ? villain.image
-              : 'https://i.pinimg.com/originals/d1/b0/e2/d1b0e2ee4beb712ccff7065cb43f65ed.jpg'
-          }
-          alt="villain portrait"
-          height="100px"
-        />
-        <h3>{villain.username}</h3>
-      </Link>
-    </div>
-  ))}
-</div> */
-}

@@ -72,6 +72,7 @@ export default function RecipeShow(props) {
             }
             alt="recipe"
           />
+          <p>{recipe.strYoutube}</p>
           {ingredients.ingr && (
             <div>
               <h3>Ingredients</h3>
@@ -82,8 +83,86 @@ export default function RecipeShow(props) {
               </ul>
             </div>
           )}
+          {nutrition && (
+            <div>
+              <h3>Nutrition</h3>
+              <ul>
+                <li>
+                  {nutrition.totalNutrientsKCal.ENERC_KCAL.label}{' '}
+                  {nutrition.totalNutrientsKCal.ENERC_KCAL.quantity}{' '}
+                  {nutrition.totalNutrientsKCal.ENERC_KCAL.unit} % Daily Value*{' '}
+                  {nutrition.totalDaily.ENERC_KCAL.quantity}{' '}
+                  {nutrition.totalDaily.ENERC_KCAL.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrientsKCal.PROCNT_KCAL.label}{' '}
+                  {nutrition.totalNutrientsKCal.PROCNT_KCAL.quantity}{' '}
+                  {nutrition.totalNutrientsKCal.PROCNT_KCAL.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrientsKCal.FAT_KCAL.label}{' '}
+                  {nutrition.totalNutrientsKCal.FAT_KCAL.quantity}{' '}
+                  {nutrition.totalNutrientsKCal.FAT_KCAL.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrientsKCal.CHOCDF_KCAL.label}{' '}
+                  {nutrition.totalNutrientsKCal.CHOCDF_KCAL.quantity}{' '}
+                  {nutrition.totalNutrientsKCal.CHOCDF_KCAL.unit}
+                </li>
+                <li>
+                  Total Fat {nutrition.totalNutrients.FAT.quantity}{' '}
+                  {nutrition.totalNutrients.FAT.unit}% Daily Value*{' '}
+                  {nutrition.totalDaily.FAT.quantity}{' '}
+                  {nutrition.totalDaily.FAT.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrients.FASAT.label} Fat{' '}
+                  {nutrition.totalNutrients.FASAT.quantity}{' '}
+                  {nutrition.totalNutrients.FASAT.unit}% Daily Value*{' '}
+                  {nutrition.totalDaily.FASAT.quantity}{' '}
+                  {nutrition.totalDaily.FASAT.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrients.FATRN.label} Fat{' '}
+                  {nutrition.totalNutrients.FATRN.quantity}{' '}
+                  {nutrition.totalNutrients.FATRN.unit}
+                </li>
+                <li>
+                  Total Carbohydrate {nutrition.totalNutrients.CHOCDF.quantity}{' '}
+                  {nutrition.totalNutrients.CHOCDF.unit}% Daily Value*{' '}
+                  {nutrition.totalDaily.CHOCDF.quantity}{' '}
+                  {nutrition.totalDaily.CHOCDF.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrients.SUGAR.label}{' '}
+                  {nutrition.totalNutrients.SUGAR.quantity}{' '}
+                  {nutrition.totalNutrients.SUGAR.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrients.CHOLE.label}{' '}
+                  {nutrition.totalNutrients.CHOLE.quantity}{' '}
+                  {nutrition.totalNutrients.CHOLE.unit}% Daily Value*{' '}
+                  {nutrition.totalDaily.CHOLE.quantity}{' '}
+                  {nutrition.totalDaily.CHOLE.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrients.NA.label}{' '}
+                  {nutrition.totalNutrients.NA.quantity}{' '}
+                  {nutrition.totalNutrients.NA.unit}% Daily Value*{' '}
+                  {nutrition.totalDaily.NA.quantity}{' '}
+                  {nutrition.totalDaily.NA.unit}
+                </li>
+                <li>
+                  {nutrition.totalNutrients.PROCNT.label}{' '}
+                  {nutrition.totalNutrients.PROCNT.quantity}{' '}
+                  {nutrition.totalNutrients.PROCNT.unit}% Daily Value*{' '}
+                  {nutrition.totalDaily.PROCNT.quantity}{' '}
+                  {nutrition.totalDaily.PROCNT.unit}
+                </li>
+              </ul>
+            </div>
+          )}
           <p>{recipe.strInstructions}</p>
-          <p>{recipe.strYoutube}</p>
         </div>
       )}
     </div>
