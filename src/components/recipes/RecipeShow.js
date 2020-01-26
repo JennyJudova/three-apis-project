@@ -8,6 +8,7 @@ export default function RecipeShow(props) {
   const [nutrition, setNutrition] = useState();
   const [errors, setErrors] = useState();
   const { id } = props.match.params;
+  const myVideo = document.getElementById('video1');
 
   // const fileDataUpdated = fileData.map((object) => {
   //   const objectUpdate = { ...object };
@@ -33,31 +34,11 @@ export default function RecipeShow(props) {
         ingrUpdate.pop();
       }
     }
-
-    console.log(ingrUpdate);
-
     let ingredients = {};
     ingredients = { ...ingredients, ingr: ingrUpdate };
     console.log(ingredients);
-
     const { YOUR_APP_ID } = process.env;
     const { YOUR_APP_KEY } = process.env;
-    // const ingredients = {
-    //   ingr: [
-    //     `${recipe.strMeasure1} ${recipe.strIngredient1}`,
-    //     `${recipe.strMeasure2} ${recipe.strIngredient2}`,
-    //     `${recipe.strMeasure3} ${recipe.strIngredient3}`,
-    //     `${recipe.strMeasure4} ${recipe.strIngredient4}`,
-    //     `${recipe.strMeasure5} ${recipe.strIngredient5}`,
-    //     `${recipe.strMeasure6} ${recipe.strIngredient6}`,
-    //     `${recipe.strMeasure7} ${recipe.strIngredient7}`,
-    //     `${recipe.strMeasure8} ${recipe.strIngredient8}`,
-    //     `${recipe.strMeasure9} ${recipe.strIngredient9}`,
-    //     `${recipe.strMeasure10} ${recipe.strIngredient10}`
-    //   ]
-    // };
-    // console.log(ingredients);
-
     axios
       .post(
         `https://api.edamam.com/api/nutrition-details?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`,
@@ -89,6 +70,23 @@ export default function RecipeShow(props) {
     if (recipe) getNutrition();
   }, [recipe]);
 
+  function playPause() {
+    if (myVideo.paused) myVideo.play();
+    else myVideo.pause();
+  }
+
+  function makeBig() {
+    myVideo.width = 560;
+  }
+
+  function makeSmall() {
+    myVideo.width = 320;
+  }
+
+  function makeNormal() {
+    myVideo.width = 420;
+  }
+
   return (
     <div className="showWrapper">
       {recipe && (
@@ -103,14 +101,15 @@ export default function RecipeShow(props) {
             alt="recipe"
           />
           <p>{recipe.strInstructions}</p>
-          <p>{recipe.bio}</p>
+          <p>{recipe.strYoutube}</p>
         </div>
       )}
     </div>
   );
 }
 
-// {recipe.plans.length > 0 && (
+{
+  /* // {recipe.plans.length > 0 && (
 //   <div>
 //     <h3>Plans</h3>
 //     <div className="villainPlans">
@@ -122,4 +121,5 @@ export default function RecipeShow(props) {
 //       ))}
 //     </div>
 //   </div>
-// )}
+// )} */
+}

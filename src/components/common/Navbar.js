@@ -13,6 +13,7 @@ export default function Navbar() {
     <nav className={`${burgerOpen ? 'burgerOpen' : ''}`}>
       <div>
         <Link to="/">Home</Link>
+        <Link to="/recipes">Recipes</Link>
       </div>
       <button
         className="burgerMenu"
