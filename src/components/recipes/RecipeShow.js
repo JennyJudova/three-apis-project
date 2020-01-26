@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-eval */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
@@ -6,21 +7,9 @@ import axios from 'axios';
 export default function RecipeShow(props) {
   const [recipe, setRecipe] = useState();
   const [nutrition, setNutrition] = useState();
+  const [ingredients, setIngredients] = useState({});
   const [errors, setErrors] = useState();
   const { id } = props.match.params;
-  const myVideo = document.getElementById('video1');
-
-  // const fileDataUpdated = fileData.map((object) => {
-  //   const objectUpdate = { ...object };
-  //   if (object.status === 'scheduled' && object.isChecked === true) {
-  //     scheduledUpdated.push(object.device);
-  //     objectUpdate.isChecked = false;
-  //     selectedUpdated -= 1;
-  //   }
-  //   setSelectedCount(selectedUpdated);
-  //   setScheduled(scheduledUpdated);
-  //   return objectUpdate;
-  // });
 
   const getNutrition = () => {
     const ingrUpdate = [];
@@ -34,15 +23,15 @@ export default function RecipeShow(props) {
         ingrUpdate.pop();
       }
     }
-    let ingredients = {};
-    ingredients = { ...ingredients, ingr: ingrUpdate };
-    console.log(ingredients);
+    const ingredientsUpdated = { ...ingredients, ingr: ingrUpdate };
+    setIngredients(ingredientsUpdated);
+    console.log(ingredientsUpdated);
     const { YOUR_APP_ID } = process.env;
     const { YOUR_APP_KEY } = process.env;
     axios
       .post(
         `https://api.edamam.com/api/nutrition-details?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`,
-        ingredients
+        ingredientsUpdated
       )
       .then((res) => {
         console.log('getNutrition res data', res.data);
@@ -70,23 +59,6 @@ export default function RecipeShow(props) {
     if (recipe) getNutrition();
   }, [recipe]);
 
-  function playPause() {
-    if (myVideo.paused) myVideo.play();
-    else myVideo.pause();
-  }
-
-  function makeBig() {
-    myVideo.width = 560;
-  }
-
-  function makeSmall() {
-    myVideo.width = 320;
-  }
-
-  function makeNormal() {
-    myVideo.width = 420;
-  }
-
   return (
     <div className="showWrapper">
       {recipe && (
@@ -100,26 +72,20 @@ export default function RecipeShow(props) {
             }
             alt="recipe"
           />
+          {ingredients.ingr && (
+            <div>
+              <h3>Ingredients</h3>
+              <ul>
+                {ingredients.ingr.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <p>{recipe.strInstructions}</p>
           <p>{recipe.strYoutube}</p>
         </div>
       )}
     </div>
   );
-}
-
-{
-  /* // {recipe.plans.length > 0 && (
-//   <div>
-//     <h3>Plans</h3>
-//     <div className="villainPlans">
-//       {recipe.plans.map((plan) => (
-//         <div key={plan._id}>
-//           <img src={plan.image} alt="Plan" height="100px" />
-//           <p>{plan.name}</p>
-//         </div>
-//       ))}
-//     </div>
-//   </div>
-// )} */
 }
