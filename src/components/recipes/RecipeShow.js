@@ -7,6 +7,7 @@ import axios from 'axios';
 export default function RecipeShow(props) {
   const [recipe, setRecipe] = useState();
   const [nutrition, setNutrition] = useState();
+  const [category, setCategory] = useState();
   const [ingredients, setIngredients] = useState({});
   const [errors, setErrors] = useState();
   const { id } = props.match.params;
@@ -54,9 +55,24 @@ export default function RecipeShow(props) {
       });
   };
 
+  const getCategory = () => {
+    axios
+      .get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe.strCategory}`
+      )
+      .then((res) => {
+        console.log(res.data.meals);
+        setCategory(res.data.meals);
+      })
+      .catch((err) => {
+        setErrors(err);
+      });
+  };
+
   useEffect(() => {
     if (!recipe) getData();
     if (recipe) getNutrition();
+    if (recipe) getCategory();
   }, [recipe]);
 
   return (
@@ -72,7 +88,10 @@ export default function RecipeShow(props) {
             }
             alt="recipe"
           />
-          <p>{recipe.strYoutube}</p>
+          <p>
+            <a href={recipe.strYoutube}>Watch how to make it.</a>
+          </p>
+          <p>Type of food: {recipe.strCategory}</p>
           {ingredients.ingr && (
             <div>
               <h3>Ingredients</h3>
@@ -163,6 +182,19 @@ export default function RecipeShow(props) {
             </div>
           )}
           <p>{recipe.strInstructions}</p>
+          {category && (
+            <div>
+              <h3>Similar recipes</h3>
+              <ul>
+                {category.slice(0, 5).map((recipeName, index) => (
+                  <li key={index}>
+                    <img src={recipeName.strMealThumb} alt="recipe" />
+                    {recipeName.strMeal}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
     </div>
